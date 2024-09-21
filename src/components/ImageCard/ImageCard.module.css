@@ -1,0 +1,7 @@
+.img {
+  display: block;
+  width: 360px;
+  height: 200px;
+  transform: scale(1);
+  transition: transform 0.5s;
+}
