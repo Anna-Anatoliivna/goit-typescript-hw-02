@@ -7,9 +7,3 @@ export interface Image {
   },
       
 }
-
-// export interface Image {
-//   id: string,
-//   alt: string,
-//   src: string
-// }
