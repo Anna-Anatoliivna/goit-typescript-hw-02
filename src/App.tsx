@@ -14,7 +14,7 @@ import { Image } from './types';
 
 
 
- const App = () => {
+ const App: React.FC = () => {
   const [query, setQuery] = useState<string>("");
   const [page, setPage] = useState<number>(1);
    const [images, setImages] = useState<Image[]>([]);
@@ -26,10 +26,12 @@ import { Image } from './types';
   const [modalSrc, setModalSrc] = useState<string>("");
   const [modalAlt, setModalAlt] = useState<string>("");
  
-   const mainEl = useRef();
+   const mainEl = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
-  if (!query) return;
+    if (!query) return;
+    
+
     const fetchImg = async () => {
       setLoader(true);
       try {
@@ -41,9 +43,12 @@ import { Image } from './types';
    if (!results.length) return setIsEmpty(true);   
  setImages((prevImages) => [...prevImages, ...results]);
         setIsVisible(page < total_pages);
-      } catch (error) {
-        // console.log(error);
-              setError(error.message);
+      } catch (error: unknown) {
+        if (error instanceof Error) {
+          setError(error.message);
+        } else {
+          setError('Unknown error occurred');
+        }
       } finally {
         setLoader(false);
       }
@@ -75,7 +80,7 @@ import { Image } from './types';
     setModalAlt("");
   };
 useEffect(() => {
-    if (page === 1) return;
+    if (page === 1 || !mainEl.current) return;
     mainEl.current.scrollIntoView({ behavior: "smooth", block: "end" });
 }, [images, page]);
    
