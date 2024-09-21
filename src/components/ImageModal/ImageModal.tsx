@@ -12,7 +12,14 @@ const customStyles = {
   overlay: { backgroundColor: "rgba(0, 0, 0, 0.7)" },
 };
 
-export const ImageModal = ({ modalIsOpen, closeModal, src, alt }) => {
+interface ImageModalProps {
+  modalIsOpen: (url: string, alt: string) => void;
+  closeModal: () => void;
+  src: string;
+  alt: string
+}
+
+export const ImageModal : React.FC <ImageModalProps> = ({ modalIsOpen, closeModal, src, alt }) => {
     return (
         <Modal
       isOpen={modalIsOpen}

@@ -1,7 +1,12 @@
+import { Image } from '../../types';
 import styles from './ImageCard.module.css'
 
+interface ImageCardProps {
+  images: Image;
+  openModal: (url: string, alt: string) => void
+}
 
-export const ImageCard = ({ images, openModal }) => {
+export const ImageCard: React.FC<ImageCardProps> = ({ images, openModal }) => {
     // console.log(images);
     
         return (

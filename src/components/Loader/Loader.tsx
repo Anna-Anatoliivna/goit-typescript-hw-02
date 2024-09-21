@@ -1,6 +1,6 @@
 import { Circles } from 'react-loader-spinner';
 
-export const Loader = () => {
+export const Loader : React.FC  = () => {
     return (
         <Circles
   height="80"

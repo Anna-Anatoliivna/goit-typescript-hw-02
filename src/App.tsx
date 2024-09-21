@@ -9,18 +9,22 @@ import { ErrorMessage } from './components/ErrorMessage/ErrorMessage';
 import { ImageModal } from './components/ImageModal/ImageModal';
 import { LoadMoreBtn } from './components/LoadMoreBtn/LoadMoreBtn';
 import toast from 'react-hot-toast';
+import { Image } from './types';
+
+
+
 
  const App = () => {
-  const [query, setQuery] = useState("");
-  const [page, setPage] = useState(1);
-   const [images, setImages] = useState([]);
-   const [error, setError] = useState(null);
-   const [isEmpty, setIsEmpty] = useState(false);
-   const [loader, setLoader] = useState(false);
-   const [isVisible, setIsVisible] = useState(false);
-   const [showModal, setShowModal] = useState(false);
-  const [modalSrc, setModalSrc] = useState("");
-  const [modalAlt, setModalAlt] = useState("");
+  const [query, setQuery] = useState<string>("");
+  const [page, setPage] = useState<number>(1);
+   const [images, setImages] = useState<Image[]>([]);
+   const [error, setError] = useState<string | null>(null);
+   const [isEmpty, setIsEmpty] = useState<boolean>(false);
+   const [loader, setLoader] = useState<boolean>(false);
+   const [isVisible, setIsVisible] = useState<boolean>(false);
+   const [showModal, setShowModal] = useState<boolean>(false);
+  const [modalSrc, setModalSrc] = useState<string>("");
+  const [modalAlt, setModalAlt] = useState<string>("");
  
    const mainEl = useRef();
   
@@ -38,7 +42,7 @@ import toast from 'react-hot-toast';
  setImages((prevImages) => [...prevImages, ...results]);
         setIsVisible(page < total_pages);
       } catch (error) {
-        console.log(error);
+        // console.log(error);
               setError(error.message);
       } finally {
         setLoader(false);
@@ -47,7 +51,7 @@ import toast from 'react-hot-toast';
     fetchImg();
     }, [query, page]);
 
-   const onHandleSubmit = (searchQuery) => {
+   const onHandleSubmit = (searchQuery: string) => {
     setQuery(searchQuery);
     setImages([]);
     setPage(1);
@@ -56,16 +60,16 @@ import toast from 'react-hot-toast';
     setIsEmpty(false);
    };
    
-   const onLoadMore = () => {
+   const onLoadMore = () : void => {
     setPage((prevPage) => prevPage + 1);
    };
    
-   const openModal = (url, alt) => {
+   const openModal = (url: string, alt: string) : void => {
     setShowModal(true);
     setModalSrc(url);
     setModalAlt(alt);
   };
-  const closeModal = () => {
+  const closeModal = () : void => {
     setShowModal(false);
     setModalSrc("");
     setModalAlt("");
